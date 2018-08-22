@@ -24,8 +24,11 @@ WS_ : (' ' | '\n' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-CHAR : '\'' (ESC|~'\'') '\'';
+CHAR : '\'' (ESC|ID|NUMBER) '\'';
 STRING : '"' (ESC|~'"')* '"';
 
 fragment
 ESC :  '\\' ('n'|'"');
+
+NUMBER :
+  ('0'..'9');
