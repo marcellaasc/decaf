@@ -17,7 +17,7 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
-CHAR : '\'' (ESC|'a'..'z' |'A'..'Z'| NUMBER|~'\'')'\'';
+CHAR : '\'' (ESC|'a'..'z' |'A'..'Z'| NUMBER|~'\'') '\'';
 
 ID  :
   ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER)*;
