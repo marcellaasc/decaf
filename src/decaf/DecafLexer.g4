@@ -17,19 +17,20 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
-CHAR : '\'' (ESC|'a'..'z' |'A'..'Z'| NUMBER|~'\'') '\'';
+CHAR : '\'' (ESC|'a'..'z' |'A'..'Z'| NUMBER|'\\t'|'\\\\') '\'';
 
 ID  :
   ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER)*;
-
-WS_ : (' '|'\n'|'\t') -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
 STRING : '"' (ESC|~'"')* '"';
 
 fragment
-ESC :  '\\' ('n'|'"'|'t'|'\\'|'\'');
+ESC :  '\\'('n'|'"'|'t'|'\\'|'\'');
 
+fragment
 NUMBER :
   ('0'..'9');
+
+WS_ : (' '|'\n'|'\t') -> skip;
