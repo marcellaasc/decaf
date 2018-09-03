@@ -17,20 +17,38 @@ tokens
 LCURLY : '{';
 RCURLY : '}';
 
-CHAR : '\'' (ESC|'a'..'z' |'A'..'Z'| NUMBER|'\\t'|'\\\\') '\'';
+IF : 'if';
+MINUS: '-';
 
 ID  :
-  ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER)*;
+  ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER_AUX)*;
+
+
+CHARLITERAL : '\'' (ESC|'a'..'z' |'A'..'Z'| NUMBER_AUX|'\\t'|'\\\\') '\'';
+
+STRING : '"'(ESC|ESC_STRING|~('"'))* '"';
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-STRING : '"' (ESC|~'"')* '"';
+HEXLIT:'0x'('a'..'f'| 'A'..'F'| '0'..'9')+;
+
+NUMBER:
+ ('0'..'9')+;
+
+
+OP_ART:('+'|'*');
+OP_REL:('<'|'<=');
+OP_COMP:('!=');
+OP_COND:('&&');
 
 fragment
 ESC :  '\\'('n'|'"'|'t'|'\\'|'\'');
 
 fragment
-NUMBER :
+ESC_STRING: ~('\'');
+
+fragment
+NUMBER_AUX :
   ('0'..'9');
 
 WS_ : (' '|'\n'|'\t') -> skip;

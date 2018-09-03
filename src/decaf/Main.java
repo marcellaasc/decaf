@@ -34,9 +34,16 @@ class Main {
 		        			case DecafLexer.ID:
 		        				type = " IDENTIFIER";
 		        				break;
-						case DecafLexer.CHAR:
+						case DecafLexer.CHARLITERAL:
 		        				type = " CHARLITERAL";
 		        				break;
+						case DecafLexer.NUMBER:
+		        				type = " INTLITERAL";
+		        				break;
+						case DecafLexer.HEXLIT:
+		        				type = " HEXADECIMAL";
+		        				break;
+
 		        			}
 
 		        			System.out.println (token.getLine() + type + " " + text);
