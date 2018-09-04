@@ -23,8 +23,7 @@ MINUS: '-';
 ID  :
   ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER_AUX)*;
 
-
-CHARLITERAL : '\'' (ESC|'a'..'z' |'A'..'Z'| NUMBER_AUX|'\\t'|'\\\\') '\'';
+CHARLITERAL: '\'' (' '..'!' | '#'..'&' | '('..'[' | ']'..'~'| '\\t'|'\\\\'| ESC) '\'';
 
 STRING : '"'(ESC|ESC_STRING|~('"'))* '"';
 
@@ -43,6 +42,9 @@ OP_COND:('&&');
 
 fragment
 ESC :  '\\'('n'|'"'|'t'|'\\'|'\'');
+
+fragment
+ESCZ : '\\'( 'n' | 't' |'\\'|'\"' | '\'' );
 
 fragment
 ESC_STRING: ~('\'');
