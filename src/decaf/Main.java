@@ -42,10 +42,8 @@ class Main {
 		        				break;
 						case DecafLexer.HEXLIT:
 		        				type = " HEXADECIMAL";
-		        				break;
-
-		        			}
-
+							break;
+						}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}
 		        		done = true;
