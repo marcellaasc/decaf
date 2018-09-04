@@ -31,6 +31,45 @@ class Main {
 
 		        			switch (token.getType())
 		        			{
+						case DecafLexer.IF:
+		        				type = "";
+		        				break;
+						case DecafLexer.BOOLEAN:
+		        				type = "";
+		        				break;
+						case DecafLexer.CALLOUT:
+		        				type = "";
+		        				break;
+						case DecafLexer.CLASS:
+		        				type = "";
+		        				break;
+						case DecafLexer.ELSE:
+		        				type = "";
+							break;
+						case DecafLexer.INT:
+		        				type = "";
+		        				break;
+						case DecafLexer.RETURN:
+		        				type = "";
+		        				break;
+						case DecafLexer.VOID:
+		        				type = "";
+		        				break;
+						case DecafLexer.FOR:
+		        				type = "";
+		        				break;
+						case DecafLexer.BREAK:
+		        				type = "";
+		        				break;
+						case DecafLexer.CONTINUE:
+		        				type = "";
+							break;
+						case DecafLexer.MINUS:
+		        				type = "";
+							break;
+						case DecafLexer.BOOLEANLIT:
+		        				type = " BOOLEANLITERAL";
+		        				break;
 						case DecafLexer.CHARLITERAL:
 		        				type = " CHARLITERAL";
 		        				break;
