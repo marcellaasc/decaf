@@ -67,6 +67,18 @@ class Main {
 						case DecafLexer.MINUS:
 		        				type = "";
 							break;
+						case DecafLexer.OP_ART:
+		        				type = "";
+		        				break;
+						case DecafLexer.OP_REL:
+		        				type = "";
+		        				break;
+						case DecafLexer.OP_COMP:
+		        				type = "";
+							break;
+						case DecafLexer.OP_COND:
+		        				type = "";
+							break;
 						case DecafLexer.BOOLEANLIT:
 		        				type = " BOOLEANLITERAL";
 		        				break;
