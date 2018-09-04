@@ -31,11 +31,11 @@ class Main {
 
 		        			switch (token.getType())
 		        			{
-		        			case DecafLexer.ID:
-		        				type = " IDENTIFIER";
-		        				break;
 						case DecafLexer.CHARLITERAL:
 		        				type = " CHARLITERAL";
+		        				break;
+						case DecafLexer.STRING:
+		        				type = " STRINGLITERAL";
 		        				break;
 						case DecafLexer.NUMBER:
 		        				type = " INTLITERAL";
@@ -43,6 +43,9 @@ class Main {
 						case DecafLexer.HEXLIT:
 		        				type = " HEXADECIMAL";
 							break;
+						case DecafLexer.ID:
+		        				type = " IDENTIFIER";
+		        				break;
 						}
 		        			System.out.println (token.getLine() + type + " " + text);
 		        		}
