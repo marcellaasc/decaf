@@ -10,4 +10,11 @@ options
   tokenVocab=DecafLexer;
 }
 
-program: TK_class ID LCURLY RCURLY EOF;
+
+program: CLASS PROGRAM LCURLY (field_decl)* (method_decl)*   RCURLY EOF; 
+
+field_decl: (LCURLY type ID | type ID LCONCHETE int_literal RCONCHETE RCURLY)+ VIRG PONTOVIRG;
+
+type: (INT | BOOLEAN);
+
+int_literal: INT;

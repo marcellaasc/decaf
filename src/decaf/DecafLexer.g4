@@ -30,6 +30,9 @@ FOR: 'for';
 BREAK: 'break';
 CONTINUE: 'continue';
 
+ClASS: 'class';
+PROGRAM:'Program'; 
+
 MINUS: '-';
 
 ID  :
@@ -54,6 +57,10 @@ OP_REL:('<'|'<='| '>'| '>=');
 OP_COMP:('!='|'='|'==');
 OP_COND:('&&');
 PONT: ('.'|'||'|';'| ':'| '!'| '['|']' | '('|')'| ',');
+LCOLCHETE:('[');
+RCONCHETE:(']');
+PONTOVIRG:(';');
+VIRG:(','); 
 
 
 fragment
