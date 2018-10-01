@@ -34,6 +34,8 @@ ClASS: 'class';
 PROGRAM:'Program'; 
 
 MINUS: '-';
+PLUS: '+';
+EXCLAMACAO : '!';
 
 ID  :
   ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER_AUX)*;
@@ -52,15 +54,19 @@ NUMBER:
  ('0'..'9')+ (~('a'..'z'|'-'|']'));
 
 
-OP_ART:('+'|'*');
+OP_ART:('*'| '/' | '%');
 OP_REL:('<'|'<='| '>'| '>=');
-OP_COMP:('!='|'='|'==');
-OP_COND:('&&');
-PONT: ('.'|'||'|';'| ':'| '!'| '['|']' | '('|')'| ',');
+OP_COMP:('!='|'==');
+OP_IGUAL: ('=');
+OP_COND:('&&' | '||');
+PONT: ('.'|'||'|';'| ':'| '!'| '['|']');
 LCOLCHETE:('[');
-RCONCHETE:(']');
+RCOLCHETE:(']');
 PONTOVIRG:(';');
-VIRG:(','); 
+VIRG:(',');
+LPARENTESES:('(');
+RPARENTESES:(')');
+
 
 
 fragment
