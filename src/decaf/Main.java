@@ -1,10 +1,18 @@
 package decaf;
 
 import java.io.*;
+import java.util.Arrays;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 //import antlr.Token;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.gui.TreeViewer;
+import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import java6035.tools.CLI.*;
 
 class Main {
@@ -136,7 +144,7 @@ class Main {
                     panel.add(viewr);
                     frame.add(panel);
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(200,200);
+                    frame.setSize(800,700);
                     frame.setVisible(true);
                 }
 

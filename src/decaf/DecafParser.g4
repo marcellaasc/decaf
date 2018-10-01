@@ -11,15 +11,17 @@ options
 }
 
 
-program: CLASS PROGRAM LCURLY (field_decl)* (method_decl)*   RCURLY EOF; 
+program: CLASS PROGRAM LCURLY  field_decl* method_decl* RCURLY EOF; 
 
-field_decl: (type ID (VIRG type ID)*| type ID LCOLCHETE int_literal RCOLCHETE (VIRG type ID LCOLCHETE int_literal RCOLCHETE)*)? PONTOVIRG;
+field_decl: type ID PONTOVIRG 
+	  |type ID (VIRG type ID)* PONTOVIRG 
+	  | type ID LCOLCHETE INT RCOLCHETE (VIRG type ID LCOLCHETE INT RCOLCHETE)* PONTOVIRG;
 
 type: (INT | BOOLEAN);
 
 int_literal: INT;
 
-method_decl:(type|VOID) ID LPARENTESES (type ID (VIRG type ID)*) RPARENTESES block;
+method_decl:(type|VOID) ID LPARENTESES (type ID (VIRG type ID)*)? RPARENTESES block;
 
 block: LCURLY (var_decl)* (statement)* RCURLY; 
 
