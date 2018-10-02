@@ -16,6 +16,12 @@ tokens
 
 LCURLY : '{';
 RCURLY : '}';
+LCOLCHETE:('[');
+RCOLCHETE:(']');
+PONTOVIRG:(';');
+VIRG:(',');
+LPARENTESES:('(');
+RPARENTESES:(')');
 
 IF : 'if';
 BOOLEANLIT: ('false'|'true');
@@ -48,8 +54,11 @@ SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
 HEXLIT:'0x'('a'..'f'| 'A'..'F'| '0'..'9')+;
 
-NUMBER:
- ('0'..'9')+ (~('a'..'z'|'-'|']'));
+//NUMBER:
+// ('0'..'9')+ (~('a'..'z'|'-'|']'));
+
+INTLIT:
+('0'..'9')+;
 
 
 OP_ART:('*'| '/' | '%');
@@ -58,13 +67,6 @@ OP_COMP:('!='|'==');
 OP_IGUAL: ('=');
 OP_COND:('&&' | '||');
 PONT: ('.'|':');
-LCOLCHETE:('[');
-RCOLCHETE:(']');
-PONTOVIRG:(';');
-VIRG:(',');
-LPARENTESES:('(');
-RPARENTESES:(')');
-
 
 
 fragment

@@ -26,7 +26,7 @@ type: INT | BOOLEAN;
 
 int_literal: decimal_literal | hex_literal;
 
-decimal_literal: NUMBER;
+decimal_literal: INTLIT;
 
 hex_literal: HEXLIT;
 
@@ -41,7 +41,7 @@ statement: location assign_op expr PONTOVIRG
 	| method_call PONTOVIRG 
 	| IF LPARENTESES expr RPARENTESES block (ELSE block)*
 	| FOR ID OP_IGUAL expr VIRG expr block
-	| RETURN expr* PONTOVIRG
+	| RETURN (expr)* PONTOVIRG
 	| BREAK PONTOVIRG
 	| CONTINUE PONTOVIRG
 	| block;
@@ -57,7 +57,7 @@ method_name: ID;
 callout_arg: expr
 	   | string_literal;
 
-method_call: method_name LPARENTESES (expr (VIRG expr)*)? RPARENTESES 
+method_call: method_name LPARENTESES (expr (VIRG expr)*)* RPARENTESES 
 	     |  CALLOUT LPARENTESES STRING ((VIRG (expr | STRING))*) RPARENTESES;
 
 literal: int_literal| CHARLITERAL | BOOLEANLIT;
