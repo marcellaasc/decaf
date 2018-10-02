@@ -29,7 +29,6 @@ VOID: 'void';
 FOR: 'for';
 BREAK: 'break';
 CONTINUE: 'continue';
-
 ClASS: 'class';
 PROGRAM:'Program'; 
 
@@ -39,7 +38,6 @@ EXCLAMACAO : '!';
 
 ID  :
   ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER_AUX)*;
-
 
 
 CHARLITERAL: '\'' (' '..'!' | '#'..'&' | '('..'[' | ']'..'~'| '\\t'|'\\\\'| ESC) '\'';
@@ -59,7 +57,7 @@ OP_REL:('<'|'<='| '>'| '>=');
 OP_COMP:('!='|'==');
 OP_IGUAL: ('=');
 OP_COND:('&&' | '||');
-PONT: ('.'|'||'|';'| ':'| '!'| '['|']');
+PONT: ('.'|':');
 LCOLCHETE:('[');
 RCOLCHETE:(']');
 PONTOVIRG:(';');
