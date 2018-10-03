@@ -75,7 +75,7 @@ class Main {
 						case DecafLexer.MINUS:
 		        				type = "";
 							break;
-						case DecafLexer.OP_ART:
+						case DecafLexer.OP_ARIT:
 		        				type = "";
 		        				break;
 						case DecafLexer.OP_REL:
@@ -96,7 +96,7 @@ class Main {
 						case DecafLexer.STRING:
 		        				type = " STRINGLITERAL";
 		        				break;
-						case DecafLexer.NUMBER:
+						case DecafLexer.INTLIT:
 		        				type = " INTLITERAL";
 		        				break;
 						case DecafLexer.HEXLIT:

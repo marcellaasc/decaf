@@ -16,12 +16,12 @@ tokens
 
 LCURLY : '{';
 RCURLY : '}';
-LCOLCHETE:('[');
-RCOLCHETE:(']');
-PONTOVIRG:(';');
-VIRG:(',');
-LPARENTESES:('(');
-RPARENTESES:(')');
+LBRACKET:('[');
+RBRACKET:(']');
+SEMICOLON:(';');
+COMMA:(',');
+LPARENTHESES:('(');
+RPARENTHESES:(')');
 
 IF : 'if';
 BOOLEANLIT: ('false'|'true');
@@ -40,7 +40,7 @@ PROGRAM:'Program';
 
 MINUS: '-';
 PLUS: '+';
-EXCLAMACAO : '!';
+EXCLAMATION : '!';
 
 ID  :
   ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER_AUX)*;
@@ -61,10 +61,10 @@ INTLIT:
 ('0'..'9')+;
 
 
-OP_ART:('*'| '/' | '%');
+OP_ARIT:('*'| '/' | '%');
 OP_REL:('<'|'<='| '>'| '>=');
 OP_COMP:('!='|'==');
-OP_IGUAL: ('=');
+OP_EQUAL: ('=');
 OP_COND:('&&' | '||');
 PONT: ('.'|':');
 
