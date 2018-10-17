@@ -116,37 +116,42 @@ class Main {
         	        }
         		}
         	}
-        	else if (CLI.target == CLI.PARSE || CLI.target == CLI.DEFAULT)
-        	{
+        	else if (CLI.target == CLI.PARSE || CLI.target == CLI.DEFAULT){
         	    // Primeiro faz o parsing da cadeia
-                DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
-                CommonTokenStream tokens = new CommonTokenStream(lexer);
-                DecafParser parser = new DecafParser(tokens);
+			DecafLexer lexer = new DecafLexer(new ANTLRInputStream(inputStream));
+			CommonTokenStream tokens = new CommonTokenStream(lexer);
+			DecafParser parser = new DecafParser(tokens);
 
-                // Adiciona as regras semÃ¢nticas
-                ParseTree tree = parser.program();
+			// Adiciona as regras semânticas
+			ParseTree tree = parser.program();
 
-                if (CLI.debug) {
-                    // Se estiver no modo debug imprime a Ã¡rvore de parsing
-                    // Create Tree View
-                    // Source: https://stackoverflow.com/questions/23809005/how-to-display-antlr-tree-gui
+			// Realiza o parsing do programa
+			DecafSymbolsAndScopes def = new DecafSymbolsAndScopes();
+			ParseTreeWalker walker = new ParseTreeWalker();
+			walker.walk(def, tree);
 
+			if (CLI.debug) {
+				// Se estiver no modo debug imprime a árvore de parsing
+				// Create Tree View
+				// Source: https://stackoverflow.com/questions/23809005/how-to-display-antlr-tree-gui
 
-                    //show AST in console
-                    System.out.println(tree.toStringTree(parser));
+				//show AST in console
+				System.out.println(tree.toStringTree(parser));
 
-                    //show AST in GUI
-                    JFrame frame = new JFrame("Antlr AST");
-                    JPanel panel = new JPanel();
-                    TreeViewer viewr = new TreeViewer(Arrays.asList(
-                            parser.getRuleNames()),tree);
-                    viewr.setScale(1.5);//scale a little
-                    panel.add(viewr);
-                    frame.add(panel);
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setSize(800,700);
-                    frame.setVisible(true);
-                }
+				//show AST in GUI
+				JFrame frame = new JFrame("Antlr AST");
+				JPanel panel = new JPanel();
+				TreeViewer viewr = new TreeViewer(Arrays.asList(
+						parser.getRuleNames()),tree);
+				viewr.setScale(1.5);//scale a little
+				panel.add(viewr);
+				frame.add(panel);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setSize(600,400);
+				frame.setResizable(true);
+				frame.setVisible(true);
+			}
+
 
             }
         	
