@@ -122,7 +122,7 @@ class Main {
 			CommonTokenStream tokens = new CommonTokenStream(lexer);
 			DecafParser parser = new DecafParser(tokens);
 
-			// Adiciona as regras semânticas
+			// Adiciona as regras semanticas
 			ParseTree tree = parser.program();
 
 			// Realiza o parsing do programa
@@ -131,7 +131,7 @@ class Main {
 			walker.walk(def, tree);
 
 			if (CLI.debug) {
-				// Se estiver no modo debug imprime a árvore de parsing
+				// Se estiver no modo debug imprime a arvore de parsing
 				// Create Tree View
 				// Source: https://stackoverflow.com/questions/23809005/how-to-display-antlr-tree-gui
 
@@ -153,7 +153,7 @@ class Main {
 			}
 
 
-            }
+        }
         	
         } catch(Exception e) {
         	// print the error:

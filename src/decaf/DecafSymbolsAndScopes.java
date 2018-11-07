@@ -9,6 +9,10 @@ import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.tree.ParseTreeProperty;
+import decaf.ExceptionList.MainNaoEncontradoException;
+import decaf.ExceptionList.VariavelNaoInstanciadaException;
+import decaf.ExceptionList.TamanhoNaoValidoException;
+import decaf.ExceptionList.NumeroDeArgumentosMetodoInvalidoException;
 
 
 /**
@@ -32,13 +36,15 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
 
     @Override
     public void enterMethod_decl(DecafParser.Method_declContext ctx) {
-        String name = ctx.ID().get(0).getText();
-        int typeTokenType = ctx.type().getStart().getType();
-        DecafSymbol.Type type = this.getType(typeTokenType);
+        //String name = ctx.ID().get(0).getText();
+        //int typeTokenType = ctx.type().getStart().getType();
+        //DecafSymbol.Type type = this.getType(typeTokenType);
 
         // push new scope by making new one that points to enclosing scope
-        FunctionSymbol function = new FunctionSymbol(name);
-        // function.setType(type); // Set symbol type
+        FunctionSymbol function = new FunctionSymbol(ctx.ID().get(0).getText());
+        for(int i = 1; i < ctx.ID().size(); i++) {
+            function.define(new VariableSymbol(ctx.ID(i).getText()));
+        }        // function.setType(type); // Set symbol type
 
         currentScope.define(function); // Define function in current scope
         saveScope(ctx, function);
@@ -64,19 +70,51 @@ public class DecafSymbolsAndScopes extends DecafParserBaseListener {
 
     @Override
     public void enterField_decl(DecafParser.Field_declContext ctx) {
-        defineVar(ctx.type(), ctx.ID().getSymbol());
+        
+        
+    
+        
+        //Verifica se e um array
+        if(ctx.LBRACKET().size() > 0 && ctx.RBRACKET().size() > 0) {//se maior que zero e um array
+            //verifica se tamanho p array e valido
+            if(Integer.parseInt(ctx.int_literal(0).getText()) == 0) {
+                try {
+                    throw new TamanhoNaoValidoException(ctx.ID(0).getText());
+                } catch (TamanhoNaoValidoException e) {
+                    // TODO Auto-generated catch block
+                    System.out.println(e.toString());
+                    System.exit(0);
+                }
+            }
+        }
+        
+        int typeTokenType = ctx.start.getType();
+
+        VariableSymbol var = new VariableSymbol(ctx.ID().get(0).getText());
+
+        // DecafSymbol.Type type = this.getType(typeTokenType);
+
+        // var.setType(type);
+        
+        System.out.println(ctx.getText());
+        System.out.println(var);
+
+        currentScope.define(var); // Define symbol in current scope
+        
+
+        //defineVar(ctx.type(), ctx.ID().getSymbol());
     }
 
     @Override
     public void exitField_decl(DecafParser.Field_declContext ctx) {
-        String name = ctx.ID().getSymbol().getText();
-        Symbol var = currentScope.resolve(name);
-        if ( var==null ) {
-            this.error(ctx.ID().getSymbol(), "no such variable: "+name);
-        }
-        if ( var instanceof FunctionSymbol ) {
-            this.error(ctx.ID().getSymbol(), name+" is not a variable");
-        }
+        String name = ctx.ID().get(0).getSymbol().getText();
+        //Symbol var = currentScope.resolve(name);
+        //if ( var==null ) {
+        //    this.error(ctx.ID().getSymbol(), "no such variable: "+name);
+        //}
+        //if ( var instanceof FunctionSymbol ) {
+        //    this.error(ctx.ID().getSymbol(), name+" is not a variable");
+        //}
     }
 
     void defineVar(DecafParser.TypeContext typeCtx, Token nameToken) {
