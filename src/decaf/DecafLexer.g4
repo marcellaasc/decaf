@@ -14,72 +14,88 @@ tokens
   TK_class
 }
 
+TK_class: 'class Program';
+
 LCURLY : '{';
+
 RCURLY : '}';
-LBRACKET:('[');
-RBRACKET:(']');
-SEMICOLON:(';');
-COMMA:(',');
-LPARENTHESES:('(');
-RPARENTHESES:(')');
+
+VIRGULA : ',';
+
+PONTVIRGULA : ';';
+
+ECOLC :'[';
+
+DCOLC :']';
+
+EPAR: '(';
+
+DPAR: ')';
+
+ATRIB :'=';
+
+OP_ARITH: '*'|'/'|'%';
+
+MAIS: '+';
+
+MENOS: '-';
+
+EXCAMACAO: '!';
+
+OP_RELACIO: '<'|'>'|'<='|'>=';
+
+OP_EQUID: '=='|'!=';
+
+OP_COND: '&&'|'||';
+
+BREAK : 'break';
+
+CALLOUT: 'callout';
+
+CONTINUE: 'continue';
+
+RETURN: 'return';
+
+TIPO : 'boolean'|'int';
+
+VOID : 'void';
+
+BOOLEAN : VALORBOOLEAN;
+
+fragment
+VALORBOOLEAN : 'true'|'false';
 
 IF : 'if';
-BOOLEANLIT: ('false'|'true');
-BOOLEAN: 'boolean';
-CALLOUT: 'callout';
-CLASS: 'class';
-ELSE: 'else';
-INT: 'int';
-RETURN: 'return';
-VOID: 'void';
+
 FOR: 'for';
-BREAK: 'break';
-CONTINUE: 'continue';
-ClASS: 'class';
-PROGRAM:'Program'; 
 
-MINUS: '-';
-PLUS: '+';
-EXCLAMATION : '!';
+ELSE: 'else';
 
-ID  :
-  ('a'..'z' | 'A'..'Z' | '_')('a'..'z' | 'A'..'Z' | '_' | NUMBER_AUX)*;
+fragment
+CONTEUDOCHAR: (' '..'!' | '#'..'&' | '('..'[' | ']'..'~');
 
+fragment
+LETRAS : ('a'..'z' | 'A'..'Z');
 
-CHARLITERAL: '\'' (' '..'!' | '#'..'&' | '('..'[' | ']'..'~'| '\\t'|'\\\\'| ESC) '\'';
+fragment
+DIGITOS: ('0'..'9');
 
-STRING : '"'(' '..'!' | '#'..'&' | '('..'[' | ']'..'~'| '\\t'|'\\\\'| ESC)* '"';
+fragment
+HEXADECIMAL: (DIGITOS|'a'..'f'|'A'..'F')+;
+
+ID  : ('_'|LETRAS)(LETRAS|DIGITOS|'_')*;
+
+INTLITERAL : '0x'(HEXADECIMAL)+|(DIGITOS)+;
+
+fragment
+ESC :  '\\' ('\\' | '\"' | '\'' | 't' | 'n');
+
+CHAR : '\'' (CONTEUDOCHAR|LETRAS|ESC) '\'';
+
+STRING : '"' (CONTEUDOCHAR+|LETRAS+|ESC)* '"';
+
+WS_ : (' ' | '\n' | '\t' ) -> skip;
 
 SL_COMMENT : '//' (~'\n')* '\n' -> skip;
 
-HEXLIT:'0x'('a'..'f'| 'A'..'F'| '0'..'9')+;
 
-//NUMBER:
-// ('0'..'9')+ (~('a'..'z'|'-'|']'));
-
-INTLIT:
-('0'..'9')+;
-
-
-OP_ARIT:('*'| '/' | '%');
-OP_REL:('<'|'<='| '>'| '>=');
-OP_COMP:('!='|'==');
-OP_EQUAL: ('=');
-OP_COND:('&&' | '||');
-PONT: ('.'|':');
-
-
-fragment
-ESC :  '\\'('n'|'"'|'t'|'\\'|'\'');
-
-fragment
-ESCZ : '\\'( 'n' | 't' |'\\'|'\"' | '\'' );
-
-fragment
-ESC_STRING: ~('\'');
-
-fragment
-NUMBER_AUX :
-  ('0'..'9');
-
-WS_ : (' '|'\n'|'\t') -> skip;

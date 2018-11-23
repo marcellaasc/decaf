@@ -10,69 +10,42 @@ options
   tokenVocab=DecafLexer;
 }
 
-
-program: CLASS PROGRAM LCURLY  field_decl* method_decl* RCURLY EOF; 
-
-field_decl: (type ID) (COMMA type ID)* SEMICOLON 
-	  | type ID LBRACKET int_literal RBRACKET (COMMA type ID LBRACKET int_literal RBRACKET)* SEMICOLON;
-
-field: type ID;
+program: TK_class LCURLY field_decl* method_decl* RCURLY EOF;
 
 
-method_decl:(type|VOID) ID LPARENTHESES (type ID (COMMA type ID)*)* RPARENTHESES block;
+field_decl: TIPO ID (VIRGULA TIPO ID)* PONTVIRGULA
+	| TIPO ID ECOLC INTLITERAL DCOLC (VIRGULA TIPO ID ECOLC INTLITERAL DCOLC)* PONTVIRGULA ;
 
+method_decl: (TIPO | VOID) ID EPAR (TIPO ID (VIRGULA TIPO ID)*)? DPAR block;
 
-type: INT | BOOLEAN;
+block: LCURLY var_decl* statement* RCURLY;
 
-int_literal: decimal_literal | hex_literal;
+var_decl: TIPO ID (VIRGULA (TIPO |ID))* PONTVIRGULA;
 
-decimal_literal: INTLIT;
-
-hex_literal: HEXLIT;
-
-string_literal: STRING;
-
-
-block: LCURLY (var_decl)* (statement)* RCURLY; 
-
-var_decl: type ID (COMMA (type ID|ID))* SEMICOLON;
-
-statement: location assign_op expr SEMICOLON 
-	| method_call SEMICOLON 
-	| IF LPARENTHESES expr RPARENTHESES block (ELSE block)*
-	| FOR ID OP_EQUAL expr COMMA expr block
-	| RETURN (expr)* SEMICOLON
-	| BREAK SEMICOLON
-	| CONTINUE SEMICOLON
+statement: location assing_op expr PONTVIRGULA
+	| method_call PONTVIRGULA
+	| IF EPAR expr DPAR block (ELSE block)?
+	| FOR ID ATRIB expr VIRGULA expr block
+	| RETURN (expr)? PONTVIRGULA
+	| BREAK PONTVIRGULA
+	| CONTINUE PONTVIRGULA
 	| block;
 
-location: ID | (ID LBRACKET expr RBRACKET);
+assing_op: ATRIB
+	|MAIS ATRIB
+	|MENOS ATRIB;
 
-assign_op: OP_EQUAL | PLUS OP_EQUAL| MINUS OP_EQUAL;
+method_call: ID EPAR (expr (VIRGULA expr)*)? DPAR
+	| CALLOUT EPAR STRING ((VIRGULA (expr | STRING))*)? DPAR;
 
-expr: location | method_call | literal | expr bin_op expr | MINUS expr | EXCLAMATION expr | LPARENTHESES expr RPARENTHESES;
+location: ID
+	|ID ECOLC expr DCOLC;
 
-method_name: ID;
-
-callout_arg: expr
-	   | string_literal;
-
-method_call: method_name LPARENTHESES (expr (COMMA expr)*)* RPARENTHESES 
-	     |  CALLOUT LPARENTHESES STRING ((COMMA (expr | STRING))*) RPARENTHESES;
-
-literal: int_literal| CHARLITERAL | BOOLEANLIT;
-
-arith_op: OP_ARIT
-	 | MINUS
-	 | PLUS;
-
-real_op: OP_REL;
-
-cond_op: OP_COND;
-
-eq_op: OP_COMP;
-
-bin_op: arith_op| real_op | eq_op | cond_op;
-
-
+expr: location
+	| method_call
+	| (INTLITERAL|CHAR|BOOLEAN)
+	| expr (OP_ARITH|OP_RELACIO|OP_EQUID|OP_COND|MAIS|MENOS) expr
+	| MENOS expr
+	| EXCAMACAO expr
+	| EPAR expr DPAR;
 
